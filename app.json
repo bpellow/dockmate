@@ -9,7 +9,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#ED0000"
     },
     "assetBundlePatterns": [
       "**/*"
@@ -19,12 +19,23 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icon.png",
+        "backgroundColor": "#ED0000"
+      },
+      "package": "com.bpellow.DockMate",
+      "config": {
+        "googleMaps": {
+          "apiKey": "GOOGLE_MAPS_KEY"
+        }
       }
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "18ee4d30-e6db-4a9f-a530-95e706ed2d45"
+      }
     }
   }
 }
