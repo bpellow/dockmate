@@ -8,6 +8,7 @@ import DockListItem from '../components/DockListItem';
 export default function HomeScreen({ navigation }) {
     const [docks, setDocks] = useState(null);
     const [refreshing, setRefreshing] = useState(false);
+    const [refreshCounter, setRefreshCounter] = useState(0);
 
     // Load docks from storage
     const loadDocks = async () => {
@@ -42,12 +43,11 @@ export default function HomeScreen({ navigation }) {
         updateStoredDocks();
     }, [docks]);
 
-
-    const onRefresh = React.useCallback(() => {
+    const onRefresh = () => {
         setRefreshing(true);
-        loadDocks();
+        setRefreshCounter(prevCounter => prevCounter + 1)
         setRefreshing(false);
-    }, []);
+    };
 
     const deleteDock = (id) => setDocks(docks.filter(dock => dock !== id));
 
@@ -56,7 +56,7 @@ export default function HomeScreen({ navigation }) {
             <FlatList
                 data={docks}
                 keyExtractor={(item, index) => index.toString()}
-                renderItem={({ item }) => <DockListItem dockId={item} refreshing={refreshing} onDelete={deleteDock} />}
+                renderItem={({ item }) => <DockListItem dockId={item} refreshing={refreshCounter} onDelete={deleteDock}/>}
                 refreshControl={
                     <RefreshControl
                         refreshing={refreshing}

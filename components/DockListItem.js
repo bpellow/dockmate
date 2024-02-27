@@ -13,14 +13,17 @@ export default function DockListItem({ dockId, refreshing, onDelete }) {
     }, [dockId, refreshing]);
 
     const readDockData = (data) => {
+        if (data !== undefined) {
         const name = data.commonName
         const nbBikes = data.additionalProperties.find(prop => prop.key === 'NbBikes').value;
         const nbEmpty = data.additionalProperties.find(prop => prop.key === 'NbEmptyDocks').value;
         const capacity = `${nbBikes}/${parseInt(nbBikes) + parseInt(nbEmpty)}`
         return { name, capacity };
+        }
     }
 
     const fetchDockData = async () => {
+        console.log("Fetching data")
         setLoading(true)
         try {
             const response = await fetch(`${BASE_URL}${dockId}`);
